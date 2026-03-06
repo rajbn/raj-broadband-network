@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GEN-Z Broadband Network</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<form name="new-connection" method="POST" data-netlify="true">
+  <h2>New Connection Request</h2>
+
+  <input type="text" name="name" placeholder="Your Name" required>
+  <input type="email" name="email" placeholder="Email" required>
+  <input type="tel" name="phone" placeholder="Phone" required>
+
+  <select name="package" required>
+    <option value="">--Select Package--</option>
+    <option value="Vnus 12Mbps 500/-">Vnus 12Mbps 500/-</option>
+    <option value="Mars 20Mbps 800/-">Mars 20Mbps 800/-</option>
+    <option value="Mercury 30Mbps 1200/-">Mercury 30Mbps 1200/-</option>
+    <option value="Jupiter 50Mbps 2000/-">Jupiter 50Mbps 2000/-</option>
+  </select>
+
+  <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>
