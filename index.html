@@ -1,30 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GEN-Z Broadband Network</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEN-Z Broadband Network</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
+        body { background: #f5f7fb; color: #334155; line-height: 1.6; }
+        .container { width: 90%; max-width: 1200px; margin: auto; }
+        :root { --primary: #0a4da2; --accent: #00d2ff; }
+
+        /* Header */
+        header { background: #fff; box-shadow: 0 4px 15px rgba(0, 0, 0, .08); position: sticky; top: 0; z-index: 1000; }
+        header .container { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; }
+        
+        .logo-box { display: flex; align-items: center; text-decoration: none; gap: 10px; }
+        .logo-box img { height: 65px; width: auto; object-fit: contain; }
+        .brand-name { font-size: 24px; font-weight: 800; color: var(--primary); letter-spacing: -1px; }
+
+        nav a { margin-left: 25px; text-decoration: none; font-weight: 600; color: #475569; transition: 0.3s; }
+        nav a:hover { color: var(--primary); }
+
+        /* Hero Section */
+        .hero {
+            padding: 160px 20px;
+            text-align: center;
+            color: #fff;
+            background: linear-gradient(rgba(10, 77, 162, .85), rgba(0, 210, 255, .7)),
+                        url("https://images.unsplash.com/photo-1535223289827-42f1e9919769") center/cover;
+            animation: zoom 20s infinite alternate;
+        }
+
+        @keyframes zoom { 0% { background-size: 100% } 100% { background-size: 115% } }
+
+        .hero h1 { font-size: 52px; font-weight: 800; margin-bottom: 20px; text-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .hero p { font-size: 20px; margin-bottom: 35px; }
+        .btn { background: #fff; color: var(--primary); padding: 14px 35px; border-radius: 50px; text-decoration: none; font-weight: 700; transition: 0.3s; display: inline-block; }
+        .btn:hover { background: var(--primary); color: #fff; transform: translateY(-3px); }
+
+        /* Sections */
+        section { padding: 80px 0; }
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title h2 { font-size: 36px; color: #1e293b; }
+
+        /* Packages */
+        .packages { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
+        .card { background: #fff; padding: 40px 30px; border-radius: 20px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,.05); transition: .3s; border: 1px solid #edf2f7; }
+        .card:hover { transform: translateY(-10px); border-color: var(--accent); }
+        .speed { font-size: 34px; font-weight: 800; color: var(--primary); margin: 10px 0; }
+        .price { font-size: 20px; color: #64748b; margin-bottom: 20px; font-weight: 600; }
+        ul { list-style: none; margin-bottom: 25px; text-align: left; }
+        ul li { margin-bottom: 10px; font-size: 15px; }
+        ul li::before { content: "✔ "; color: #22c55e; font-weight: bold; }
+        .order { display: block; background: var(--primary); color: #fff; padding: 12px; border-radius: 10px; text-decoration: none; font-weight: 700; transition: 0.3s; }
+        .order:hover { background: #083d81; }
+
+        /* Coverage */
+        .coverage { background: #eef6ff; text-align: center; }
+        .coverage h3 { color: var(--primary); margin-top: 15px; font-size: 22px; word-spacing: 5px; }
+
+        /* Form */
+        .form { max-width: 500px; margin: auto; background: #fff; padding: 30px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        .form input { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ddd; outline: none; }
+        .form button { width: 100%; padding: 14px; border: none; background: var(--primary); color: #fff; font-weight: 700; border-radius: 8px; cursor: pointer; transition: 0.3s; }
+
+        /* Map */
+        .map-container { border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+
+        /* Footer */
+        footer { background: #0f172a; color: #cbd5e1; text-align: center; padding: 50px 0; }
+
+        /* Floating Buttons */
+        .float-btn { position: fixed; right: 20px; color: #fff; padding: 12px 20px; border-radius: 50px; text-decoration: none; font-weight: 700; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: 0.3s; }
+        .whatsapp { bottom: 20px; background: #25D366; }
+        .call { bottom: 80px; background: #0a4da2; }
+        .speedtest { bottom: 140px; background: #ff6b00; }
+        .float-btn:hover { transform: scale(1.05); }
+
+        @media(max-width:768px){
+            nav { display: none; }
+            .hero h1 { font-size: 32px; }
+            .hero { padding: 120px 20px; }
+        }
+    </style>
 </head>
+
 <body>
 
-<form name="new-connection" method="POST" data-netlify="true">
-  <h2>New Connection Request</h2>
+    <header>
+        <div class="container">
+            <a href="#" class="logo-box">
+                <img src="https://i.postimg.cc/TwPDZqVp/Gemini-Generated-Image-v3vxzbv3vxzbv3vx.png" alt="GEN-Z Logo">
+                <span class="brand-name">GEN-Z</span>
+            </a>
+            <nav>
+                <a href="#plans">Packages</a>
+                <a href="#connection">New Connection</a>
+                <a href="#coverage">Coverage</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
 
-  <input type="text" name="name" placeholder="Your Name" required>
-  <input type="email" name="email" placeholder="Email" required>
-  <input type="tel" name="phone" placeholder="Phone" required>
+    <section class="hero">
+        <div class="container">
+            <h1>Welcome to <br>GEN-Z Broadband Network</h1>
+            <p>Reliable High-Speed Broadband Network in Rangchapra, Bhaluka</p>
+            <a href="#plans" class="btn">Explore Plans</a>
+        </div>
+    </section>
 
-  <select name="package" required>
-    <option value="">--Select Package--</option>
-    <option value="Vnus 12Mbps 500/-">Vnus 12Mbps 500/-</option>
-    <option value="Mars 20Mbps 800/-">Mars 20Mbps 800/-</option>
-    <option value="Mercury 30Mbps 1200/-">Mercury 30Mbps 1200/-</option>
-    <option value="Jupiter 50Mbps 2000/-">Jupiter 50Mbps 2000/-</option>
-  </select>
+    <section id="plans">
+        <div class="container">
+            <div class="section-title"><h2>Internet Packages</h2></div>
+            <div class="packages">
+                <div class="card">
+                    <h3>Venus</h3>
+                    <div class="speed">12 Mbps</div>
+                    <div class="price">৳500 /month</div>
+                    <ul><li>Youtube Unlimited</li><li>FTP Unlimited</li><li>24/7 Support</li></ul>
+                    <a href="https://wa.me/8801918478035" class="order">Order Now</a>
+                </div>
+                <div class="card">
+                    <h3>Mars</h3>
+                    <div class="speed">20 Mbps</div>
+                    <div class="price">৳800 /month</div>
+                    <ul><li>Youtube Unlimited</li><li>FTP Unlimited</li><li>24/7 Support</li></ul>
+                    <a href="https://wa.me/8801918478035" class="order">Order Now</a>
+                </div>
+                <div class="card">
+                    <h3>Mercury</h3>
+                    <div class="speed">30 Mbps</div>
+                    <div class="price">৳1200 /month</div>
+                    <ul><li>Youtube Unlimited</li><li>FTP Unlimited</li><li>24/7 Support</li></ul>
+                    <a href="https://wa.me/8801918478035" class="order">Order Now</a>
+                </div>
+                <div class="card">
+                    <h3>Jupiter</h3>
+                    <div class="speed">50 Mbps</div>
+                    <div class="price">৳2000 /month</div>
+                    <ul><li>Youtube Unlimited</li><li>FTP Unlimited</li><li>24/7 Support</li></ul>
+                    <a href="https://wa.me/8801918478035" class="order">Order Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <button type="submit">Submit</button>
-</form>
+    <section id="connection">
+        <div class="container">
+            <div class="section-title"><h2>New Connection Request</h2></div>
+            <div class="form">
+                <input type="text" placeholder="Your Full Name">
+                <input type="text" placeholder="Phone Number">
+                <input type="text" placeholder="Full Address">
+                <button>Submit Request</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="coverage" class="coverage">
+        <div class="container">
+            <div class="section-title"><h2>Coverage Area</h2></div>
+            <p>We are currently providing service in:</p>
+            <h3>Rangcapra • Nishaiganj • Muqkir Bazar • Nandibari</h3>
+        </div>
+    </section>
+
+    <section id="location">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Office Location</h2>
+                <p>📍 Rangchapra, Bhaluka, Mymensingh</p>
+            </div>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14541.282536838345!2d90.3541177!3d24.3353592!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x375609436d405781%3A0x1d374e2d3618484e!2sRangchapra!5e0!3m2!1sen!2sbd!4v1710000000000!5m2!1sen!2sbd" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <p>📍 Office: Rangchapra, Bhaluka, Mymensingh</p>
+        <p>📞 Helpline: 01918-478035</p>
+        <p style="margin-top: 15px; font-size: 14px;">© 2026 <strong>GEN-Z Broadband Network</strong>. All Rights Reserved.</p>
+    </footer>
+
+    <a class="float-btn speedtest" href="https://fast.com" target="_blank">⚡ Speed Test</a>
+    <a class="float-btn call" href="tel:01918478035">📞 Call</a>
+    <a class="float-btn whatsapp" href="https://wa.me/8801918478035">💬 WhatsApp</a>
 
 </body>
 </html>
